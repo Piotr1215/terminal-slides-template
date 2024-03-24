@@ -1,6 +1,6 @@
 ---
 theme: theme.json
-author: Piotr Zaniewski
+author: Change Author
 date: MMMM dd, YYYY
 paging: Slide %d / %d
 ---
