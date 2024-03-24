@@ -21,12 +21,23 @@ Ensure you have the following tools installed on your system:
    chmod +x slides.md justfile
    ```
 
-    This step is crucial for allowing the slides tool to execute commands specified in your Markdown slides.
+   This step is crucial for allowing the slides tool to execute commands specified in your Markdown slides.
 
 3. **Update the Justfile**: Update the `justfile` with the title of your
    presentation and the author. These variables will be used to generate the slide.
 
-4. **Run Your Presentation**: With `slides` installed and execution permissions set, you can now run your presentation using the following command:
+4. **Update the Slides**: Update the `slides.md` file with your presentation content. The slides are written in Markdown, with the ability to execute commands within the slides. For example, you can include the output of a command in your slides using the following syntax:
+
+   ````markdown
+   ```bash
+   $ echo "Hello, World!"
+   Hello, World!
+   ```
+   ````
+
+   The command will be executed, and the output will be displayed in the slides.
+
+5. **Run Your Presentation**: With `slides` installed and execution permissions set, you can now run your presentation using the following command:
 
    ```bash
    just present
