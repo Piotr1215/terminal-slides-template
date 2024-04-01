@@ -1,0 +1,46 @@
+digraph {
+  rankdir=LR 
+  compound=true;
+  splines=false;
+
+  node [ fontname="Handlee" ];
+
+  user [label="Developer"]
+
+  graph [rank = same]
+  subgraph cluster_website {
+      label="*Backstage*";
+      subgraph cluster_service {
+
+          label="*Service Overview & Builtin Plugins*";
+          ov [label="Overview"]
+          builtins [label="source\ndocs\napi\nlinks\nci/cd\ndependencies"];
+      }
+      subgraph cluster_plugins {
+          label="*Custom Plugins*";
+          pl [label="ArgoCD\nGit PRs\netc"]
+      }
+  }
+  
+  subgraph aws {
+      label="*AWS*";
+      S3 [label="S3 content"];
+  }
+
+  subgraph upbound_api {
+      label="*Upbound*";
+      inf [label="Composition\nInfra Status"];
+  }
+
+  graf [label="Grafana Dashboard"]
+  
+  ov -- builtins 
+
+  user -> ov     [label="Interact: HTTPS"     lhead=cluster_service dir=both];
+  pl -> ov       [label="Feed"        lhead=cluster_plugins dir="both"];
+
+  edge           [label="Pull" lhead=cluster_plugins];
+  inf -> pl      
+  S3 -> pl       
+  graf -> pl
+}

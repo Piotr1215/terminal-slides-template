@@ -4,6 +4,8 @@
 presentation_title               := "Change Title"
 author                           := "Change Author"
 replace                          := if os() == "linux" { "sed -i"} else { "sed -i '' -e" }
+diagrams                         := justfile_directory() + "/diagrams"
+
 
 # show all the justfile recipes
 default:
@@ -13,6 +15,30 @@ default:
 author:
   #!/usr/bin/env bash
   {{replace}} '/^author: /s/:.*/: {{author}}/' slides.md
+
+# run graphasy diagram
+plantuml diagram:
+  #!/usr/bin/env bash  
+  export diagram="{{diagram}}"
+  if command -v plantuml &>/dev/null; then
+          java -jar /usr/local/bin/plantuml.jar {{diagrams}}/"$diagram".puml -utxt
+          mv {{diagrams}}/"$diagram".utxt /tmp/"$diagram".utxt
+          cat /tmp/"$diagram".utxt
+  else
+          echo " "
+  fi
+
+# run graphasy diagram
+digraph diagram:
+  #!/usr/bin/env bash  
+  export diagram="{{diagram}}"
+  if command -v graph-easy &>/dev/null; then
+          graph-easy {{diagrams}}/"$diagram".dot --as=boxart > {{diagrams}}/"$diagram".txt
+          cat {{diagrams}}/"$diagram".txt
+  else
+          echo " "
+  fi
+
 
 # run the presentation
 present: author
