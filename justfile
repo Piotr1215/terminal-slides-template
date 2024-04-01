@@ -2,6 +2,7 @@
 
 # Variables will be overriden by the prepare recipe
 presentation_title               := "Change Title"
+demo_title                       := "Let's talk"
 author                           := "Change Author"
 replace                          := if os() == "linux" { "sed -i"} else { "sed -i '' -e" }
 diagrams                         := justfile_directory() + "/diagrams"
@@ -44,13 +45,14 @@ digraph diagram:
 present: author
   @slides ./slides.md
 
-# show demo ascii
+# show ending ascii
 demo:
   #!/usr/bin/env bash
+  export title="{{demo_title}}"
   if command -v figlet &>/dev/null && command -v boxes &>/dev/null; then
-      echo "DEMO TIME" | figlet -f pagga | boxes -d peek
+      echo "$title" | figlet -f pagga | boxes -d peek
   else
-      echo "DEMO TIME"
+      echo "$title"
   fi
 
 # show intro ascii
