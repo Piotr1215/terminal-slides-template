@@ -39,6 +39,28 @@ It will be overriden by command output. The `https-handshake` is the name of dig
 It will be overriden by command output. the `components` is the name of PlantUML diagram to render.
 ~~~
 ```
+---
+
+## We can execute code in slides
+
+> Hit `Ctrl + e` to execute  the below code block
+
+```bash
+ls -lah --color=always
+```
+---
+
+### Or run programs
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
 
 ---
 

@@ -46,6 +46,10 @@ the slides.
    just present AuthorName
    ```
 
+## Note on diagrams
+
+As a rule of thumb, use `PlantUML` to render sequence diagrams and `graph-easy` to render component diagrams.
+
 ## Customize theme
 
 The `theme.json` file is a [glamour-compatible](https://github.com/charmbracelet/glamour/tree/master/styles) theme file that can be used to customize the appearance of the slides. You can modify the colors, fonts, and other style elements
