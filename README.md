@@ -17,6 +17,10 @@ Ensure you have the following tools installed on your system:
 
 1. **Use the repository template**: Start by cloning or creating a new repo.
 
+```bash
+gh repo create --template piotr1215/terminal-slides-template --private your-slides-repo --clone
+```
+
 > [!IMPORTANT]
 > 2. **Set Execution Permissions**: Ensure that both `slides.md` and the `justfile` have execution permissions. This can be done with the following command:
 
