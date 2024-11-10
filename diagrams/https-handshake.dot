@@ -1,0 +1,28 @@
+digraph {
+    rankdir=LR;
+    compound=true;
+    splines=true;
+    node [fontname="Handlee"];
+    
+    subgraph cluster_client {
+        label="Client";
+        client [label="Browser"];
+    }
+    
+    subgraph cluster_server {
+        label="Server";
+        server [label="Web Server"];
+        cert [label="Certificate\nPublic Key"];
+    }
+    
+    client -> server [label="1. Client Hello\n(TLS version, cipher suites)"];
+    server -> client [label="2. Server Hello\n(chosen TLS version & cipher)"];
+    server -> client [label="3. Send Certificate"];
+    client -> server [label="4. Client Key Exchange\n(encrypted pre-master secret)"];
+    client -> server [label="5. Change Cipher Spec"];
+    client -> server [label="6. Finished"];
+    server -> client [label="7. Change Cipher Spec"];
+    server -> client [label="8. Finished"];
+    
+    {rank=same; client server}
+}

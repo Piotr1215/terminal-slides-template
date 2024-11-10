@@ -1,7 +1,6 @@
 @startuml
 hide footbox
 autonumber
-!theme reddress-darkred
 title Backstage new service flow
 
 actor "Developer" as developer

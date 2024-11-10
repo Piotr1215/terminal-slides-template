@@ -1,24 +1,32 @@
 ---
 theme: theme.json
-author: Change Author
+author: Author Name
 date: MMMM dd, YYYY
 paging: Slide %d / %d
 ---
 
 ```bash
-~~~just intro
-This is presentation title, change it in justfile
+~~~just intro Title with Figlet
+This will render the presnetation title.
 ~~~
 ```
 
 ---
 
+```bash
+~~~just intro_toilet Alternative Title with Toilet
+This will render the presnetation title.
+~~~
+```
+
+---
+
+
 ## Example Diagram with GraphEasy
 
 ```bash
-~~~just digraph plugins
-There must be empty line between the ~~~. It will be overriden by command
-output. The `plugins` is the name of digraph diagram to render.
+~~~just digraph https-handshake
+It will be overriden by command output. The `https-handshake` is the name of digraph diagram to render.
 ~~~
 ```
 
@@ -28,8 +36,7 @@ output. The `plugins` is the name of digraph diagram to render.
 
 ```bash
 ~~~just plantuml components
-There must be empty line between the ~~~. It will be overriden by command
-output. the `components` is the name of plantuml diagram to render.
+It will be overriden by command output. the `components` is the name of PlantUML diagram to render.
 ~~~
 ```
 
@@ -38,7 +45,7 @@ output. the `components` is the name of plantuml diagram to render.
 # Demo
 
 ```bash
-~~~just demo
-Adjust demo_text variable in justfile to change this text.
+~~~just demo Let's Demo Something Cool
+Another text box for demo title.
 ~~~
 ```

@@ -1,21 +1,50 @@
 #!/usr/bin/env -S just --justfile
 
-# Variables will be overriden by the prepare recipe
-presentation_title               := "Change Title"
-demo_title                       := "Let's talk"
-author                           := "Change Author"
+# confgiuration
 replace                          := if os() == "linux" { "sed -i"} else { "sed -i '' -e" }
 diagrams                         := justfile_directory() + "/diagrams"
-
 
 # show all the justfile recipes
 default:
   @just --list
 
-# change presentation author
-author:
+# change presentation author in the slides
+change_author author:
   #!/usr/bin/env bash
   {{replace}} '/^author: /s/:.*/: {{author}}/' slides.md
+
+# run the presentation
+present author: (change_author author)
+  @slides ./slides.md
+
+# list all the figlet fonts
+list_figlet_fonts:
+  #!/usr/bin/env bash
+  if command -v figlet &>/dev/null; then
+    showfigfonts
+  else
+    echo "figlet not installed"
+  fi
+
+# list all the toilet fonts
+list_toilet_formats_filters:
+  #!/usr/bin/env bash
+  if command -v toilet &>/dev/null; then
+    toilet -F list
+    echo ""
+    toilet -E list
+  else
+    echo "toilet not installed"
+  fi
+
+# list all the boxes
+list_boxes:
+  #!/usr/bin/env bash
+  if command -v boxes &>/dev/null; then
+    boxes -l
+  else
+    echo "boxes not installed"
+  fi
 
 # run graphasy diagram
 plantuml diagram:
@@ -40,28 +69,43 @@ digraph diagram:
           echo " "
   fi
 
-
-# run the presentation
-present: author
-  @slides ./slides.md
-
-# show ending ascii
-demo:
+# show freetext
+freetext *free_text:
   #!/usr/bin/env bash
-  export title="{{demo_title}}"
+  export title="{{free_text}}"
   if command -v figlet &>/dev/null && command -v boxes &>/dev/null; then
-      echo "$title" | figlet -f pagga | boxes -d peek
+      echo "$title" | figlet -f pagga -w 200 | boxes -d peek
   else
       echo "$title"
   fi
 
-# show intro ascii
-intro:
+# show ending ascii
+demo *demo_title:
   #!/usr/bin/env bash
-  export title="{{presentation_title}}"
+  export title="{{demo_title}}"
+  if command -v figlet &>/dev/null && command -v boxes &>/dev/null; then
+      echo "$title" | figlet -f pagga -w 200 | boxes -d peek
+  else
+      echo "$title"
+  fi
+
+# show intro ascii using figlet
+intro *pres_title:
+  #!/usr/bin/env bash
+  export title="{{pres_title}}"
 
   if command -v figlet &>/dev/null && command -v boxes &>/dev/null; then
-    echo "$title" | figlet -f future | boxes -d peek
+    echo "$title" | figlet -f future -w 200 | boxes -d peek
+  else
+    echo "$title"
+  fi
+
+# show intro ascii using toilet
+intro_toilet *pres_title:
+  #!/usr/bin/env bash
+  export title="{{pres_title}}"
+  if command -v toilet &>/dev/null && command -v boxes &>/dev/null; then
+    echo "$title" | toilet -f mono9 -w 250 --filter border
   else
     echo "$title"
   fi
