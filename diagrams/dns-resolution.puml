@@ -1,0 +1,24 @@
+@startuml
+hide footbox
+autonumber
+title Simple DNS Resolution Flow
+
+actor "User" as user
+participant "Browser" as browser
+participant "Local DNS Resolver" as resolver
+participant "DNS Server" as dns
+
+== DNS Query Process ==
+user -> browser: Enter example.com
+browser -> resolver: Lookup example.com
+
+resolver -> dns: Query example.com
+note right: If not in cache,\nask DNS server
+dns --> resolver: Return IP (203.0.113.1)
+
+resolver --> browser: Return IP address
+browser --> user: Load website
+
+note over resolver: Cache result for future use
+
+@enduml

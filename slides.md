@@ -35,8 +35,8 @@ It will be overriden by command output. The `https-handshake` is the name of dig
 ## Example Diagram with PlantUML
 
 ```bash
-~~~just plantuml components
-It will be overriden by command output. the `components` is the name of PlantUML diagram to render.
+~~~just plantuml dns-resolution
+It will be overriden by command output. the `dns-resolution` is the name of PlantUML diagram to render.
 ~~~
 ```
 ---
